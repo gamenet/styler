@@ -1,0 +1,24 @@
+{
+  "name": "styler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "start": "nw",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "window": {
+    "title": "GameNet Styler",
+    "icon": "images/icon.ico",
+    "toolbar": false,
+    "width": 920,
+    "height": 760,
+    "resizable": true,
+    "position": "center"
+  },
+  "webkit": {
+    "plugin": true
+  }
+}

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/dist/css/bootstrap-theme.css">
+    <link rel="stylesheet" type="text/css" href="vendor/xaguilars-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css">
+
+
+    <script src="vendor/jquery/dist/jquery.js"></script>
+    <script src="vendor/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="vendor/xaguilars-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js"></script>
+    <script src="vendor/mousetrap/mousetrap.min.js"></script>
+
+    <script src="vendor/lodash/lodash.js"></script>
+    <script src="vendor/knockout/dist/knockout.js"></script>
+
+    <script src="app/colorpicker.js"></script>
+    <script src="app/index.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">GameNet Styler</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="#" data-bind="click: $root.open">Открыть</a></li>
+                <li><a href="#" data-bind="click: $root.save, visible: $root.currentFile">Сохранить</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" data-bind="click: quit">Выйти</a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+<br/>
+<br/>
+<br/>
+<br/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="jumbotron"  data-bind="visible: state() === 'select'">
+                <h1>Styler</h1>
+
+                <p>Чтобы отредактировать стиль для приложения GameNet выбери файл и следуй указаниям мастера редактирования стилей.</p>
+
+                <p><a class="btn btn-primary btn-lg" href="#" role="button" data-bind="click: $root.open">Выбрать стиль</a></p>
+            </div>
+
+            <div class="panel panel-default" data-bind="visible: state() === 'base'">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Свойства стиля</h3>
+                </div>
+                <div class="panel-body">
+                    <form data-bind="with: currentStyle">
+                        <div class="form-group">
+                            <label for="styleId">Style Id</label>
+                            <input type="email" class="form-control" id="styleId" placeholder="Id" data-bind="value: id">
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" data-bind="checked: isDefault"> Это стиль по умолчанию?
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="version">Version</label>
+                            <select id="version" class="form-control" data-bind="options: availableVersions, value: version"></select>
+                        </div>
+
+                        <!-- ko foreach: names -->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon" data-bind="text: lang">@</span>
+                                <input type="text" class="form-control" placeholder="Название" data-bind="value: name">
+                            </div>
+                        </div>
+                        <!-- /ko-->
+
+                        <button type="submit" class="btn btn-default" data-bind="click: $root.editColor"> Далее</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="panel panel-default" data-bind="visible: state() === 'colors'">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Цвета</h3>
+
+                </div>
+                <div class="panel-body">
+                    <form class="form-inline">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" data-bind="checked: $root.autoSave"> Авто сохранение
+                            </label>
+                        </div>
+                    </form>
+
+                    <table class="table" data-bind="with: currentStyle">
+                        <thead></thead>
+                        <tbody  data-bind="foreach: styles">
+                            <tr>
+                                <td>
+                                    <p  data-bind="text: $index">
+                                </td>
+                                <td>
+                                    <p  data-bind="text: name">
+                                </td>
+                                <td>
+                                    <!-- ko if: type === 'color' -->
+                                    <div class="input-group" data-bind="colorpicker: value">
+                                        <input type="text" class="form-control" value="#000000"/>
+                                        <span class="input-group-addon" ><i></i></span>
+                                    </div>
+                                    <!-- /ko -->
+
+                                    <!-- ko if: type === 'other' -->
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" data-bind="value: value"/>
+                                    </div>
+                                    <!-- /ko -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<input id="fileSelector" type="file" accept=".style" style="display: none">
+</body>
+</html>

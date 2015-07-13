@@ -1,0 +1,23 @@
+{
+  "name": "styler",
+  "version": "1.0.0",
+  "authors": [
+    "nikolay.bondarenko <nikolay.bondarenko@syncopate.ru>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "knockout": "~3.3.0",
+    "bootstrap": "~3.3.5",
+    "jquery": "~2.1.4",
+    "lodash": "~3.10.0",
+    "xaguilars-bootstrap-colorpicker": "~2.2.0",
+    "mousetrap": "~1.5.3"
+  }
+}

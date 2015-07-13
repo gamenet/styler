@@ -1,0 +1,11 @@
+{
+  "name": "styler_package",
+  "version": "1.0.0",
+  "devDependencies": {
+    "gulp": "^3.x",
+    "node-webkit-builder": "^1.x"
+  },
+  "dependencies": {
+    "gulp-util": "^2.2.14"
+  }
+}
